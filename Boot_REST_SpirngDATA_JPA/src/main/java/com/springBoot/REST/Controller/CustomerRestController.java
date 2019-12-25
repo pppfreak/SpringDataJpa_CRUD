@@ -19,59 +19,51 @@ import com.springBoot.REST.Entity.Customer;
 @RequestMapping("/api")
 public class CustomerRestController {
 
-	
 	@Autowired
 	private CustomerService customerService;
 
 	@GetMapping("/customers")
 	public List<Customer> findCustomer() {
-		List<Customer> list = customerService.findAll_Customers();
-		return list;
+		System.out.println("Hi there");
+		return customerService.findAll_Customers();
+
 	}
-	
+
 	@GetMapping("/customers/{id}")
 	public Customer getCustomer(@PathVariable int id) {
-		
+
 		Customer theCustomer = customerService.getCustomer(id);
-		
-		if(theCustomer==null) {
-			throw new RuntimeException("Customer not found-"+id);
+
+		if (theCustomer == null) {
+			throw new RuntimeException("Customer not found-" + id);
 		}
 		return theCustomer;
 	}
-	
+
 	@PostMapping("/customers")
 	public Customer saveCustomer(@RequestBody Customer customer) {
-		
+
 		customerService.saveCustomer(customer);
 		return customer;
 	}
-	
+
 	@PutMapping("/customers")
 	public Customer updateCustomer(@RequestBody Customer customer) {
-		
+
 		customerService.saveCustomer(customer);
 		return customer;
 	}
-	
+
 	@DeleteMapping("/customers/{id}")
 	public String deleteCustomer(@PathVariable int id) {
-		
+
 		Customer customer = customerService.getCustomer(id);
-		
-		if(customer==null) {
-			throw new RuntimeException("Customer not found- "+id);
+
+		if (customer == null) {
+			throw new RuntimeException("Customer not found- " + id);
 		}
 		customerService.deleteCustomer(id);
-		return "Delete the customer "+id;
+		return "Delete the customer " + id;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
